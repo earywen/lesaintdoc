@@ -24,7 +24,7 @@ const loadoutSchema = z.object({
     mainClass: z.string().min(1, "Ta classe est requise, champion."),
     mainSpec: z.string().min(1, "Ta spé est requise."),
     offSpec: z.string().optional(),
-    hasAlt: z.boolean().default(false),
+    hasAlt: z.boolean(),
     altClass: z.string().optional(),
     altSpec: z.string().optional(),
     notes: z.string().optional(),
@@ -48,7 +48,13 @@ export function OnboardingWizard({ userName }: OnboardingWizardProps) {
     const form = useForm<LoadoutFormValues>({
         resolver: zodResolver(loadoutSchema),
         defaultValues: {
+            mainClass: "",
+            mainSpec: "",
             hasAlt: false,
+            offSpec: undefined,
+            altClass: undefined,
+            altSpec: undefined,
+            notes: undefined,
         },
     });
 

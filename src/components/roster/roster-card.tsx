@@ -33,10 +33,8 @@ export function RosterCard({ member, currentUser, index }: RosterCardProps) {
 
     const statusStyles: Record<string, string> = {
         confirmed: "text-green-400 border-green-500/30 bg-green-500/10",
-        tentative: "text-yellow-400 border-yellow-500/30 bg-yellow-500/10",
-        bench: "text-orange-400 border-orange-500/30 bg-orange-500/10",
-        declined: "text-red-400 border-red-500/30 bg-red-500/10",
-        late: "text-purple-400 border-purple-500/30 bg-purple-500/10",
+        pending: "text-yellow-400 border-yellow-500/30 bg-yellow-500/10",
+        apply: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
     };
 
     return (
@@ -74,7 +72,7 @@ export function RosterCard({ member, currentUser, index }: RosterCardProps) {
                     <span
                         className={cn(
                             "px-2 py-0.5 text-xs rounded-full border font-medium uppercase tracking-wide",
-                            statusStyles[member.status] || statusStyles.tentative
+                            statusStyles[member.status] || statusStyles.pending
                         )}
                     >
                         {member.status}

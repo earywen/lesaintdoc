@@ -41,7 +41,7 @@ export const submitRosterEntry = async (input: z.infer<typeof submitRosterSchema
                 altClass: data.altClass || null,
                 altSpec: data.altSpec || null,
                 notes: data.notes || null,
-                status: data.isPlaying ? "tentative" : "declined",
+                status: data.isPlaying ? "pending" : "apply",
                 isLockedIn: false,
             });
 

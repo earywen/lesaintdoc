@@ -14,10 +14,8 @@ interface RosterGridProps {
 
 const statusColors: Record<string, string> = {
     confirmed: "bg-emerald-500 shadow-emerald-500/50",
-    tentative: "bg-amber-500 shadow-amber-500/50",
-    bench: "bg-orange-500 shadow-orange-500/50",
-    declined: "bg-red-500 shadow-red-500/50",
-    late: "bg-purple-500 shadow-purple-500/50",
+    pending: "bg-amber-500 shadow-amber-500/50",
+    apply: "bg-cyan-500 shadow-cyan-500/50",
 };
 
 const roleIcons: Record<string, string> = {
@@ -84,7 +82,7 @@ export function RosterGrid({ analysis, currentUser }: RosterGridProps) {
                                         <TooltipTrigger>
                                             <div className={cn(
                                                 "w-2 h-2 rounded-full shadow-lg",
-                                                statusColors[player.status || "tentative"] || statusColors.tentative
+                                                statusColors[player.status || "pending"] || statusColors.pending
                                             )} />
                                         </TooltipTrigger>
                                         <TooltipContent side="right">

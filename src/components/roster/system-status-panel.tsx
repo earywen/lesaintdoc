@@ -131,7 +131,7 @@ export function SystemStatusPanel({ coverage, analysis }: SystemStatusPanelProps
     const getProviders = (buffId: string): { name: string; className: string }[] => {
         const providers = PROVIDER_MAP[buffId] || [];
         const confirmed = analysis.players.filter(p =>
-            p.status === "confirmed" || p.status === "late"
+            p.status === "confirmed"
         );
 
         return confirmed
