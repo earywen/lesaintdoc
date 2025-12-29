@@ -32,7 +32,7 @@ export default async function Home() {
         refresh
       />
 
-      <div className="z-10 text-center space-y-8 p-8 backdrop-blur-sm rounded-xl border border-white/10 bg-black/20">
+      <div className="z-10 text-center space-y-8 px-12 py-8 backdrop-blur-sm rounded-xl border border-white/10 bg-black/20">
         <h1 className="text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-500">
           Bienvenue sur le Saint Doc 12.0
         </h1>
