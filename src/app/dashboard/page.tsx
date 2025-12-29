@@ -119,8 +119,16 @@ export default async function DashboardPage() {
     };
 
     return (
-        <div className="min-h-screen">
-            {/* Background decoration */}
+        <div className="min-h-screen relative">
+            {/* Wallpaper Background - Subtle */}
+            <div
+                className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: "url('/wallpaper.jpg')" }}
+            />
+            {/* Dark Overlay for Glassmorphism Effect */}
+            <div className="fixed inset-0 bg-black/85" />
+
+            {/* Gradient decoration */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-3xl" />
                 <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-3xl" />
