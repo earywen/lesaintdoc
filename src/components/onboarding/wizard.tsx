@@ -143,8 +143,7 @@ export function OnboardingWizard({ userName }: OnboardingWizardProps) {
                                 </CardHeader>
                                 <CardContent className="text-center text-zinc-400 leading-relaxed">
                                     <p>
-                                        Je sais, vous m'avez harcelé pendant des semaines pour avoir le Roster de Midnight.
-                                        Vous pouvez ranger les fourches et les torches. C'est l'heure de s'inscrire.
+                                        C'est bon les gadjots, il est là la maudit doc'. La Jet Set rempile pour Midnight!
                                     </p>
                                 </CardContent>
                                 <CardFooter>
@@ -190,7 +189,7 @@ export function OnboardingWizard({ userName }: OnboardingWizardProps) {
                                 <form onSubmit={form.handleSubmit(onSubmit)}>
                                     <CardHeader className="pb-4">
                                         <CardTitle className="text-xl text-white">Allez {userName}, dis-nous tout.</CardTitle>
-                                        <CardDescription>Configure ton setup pour la prochaîne saison.</CardDescription>
+                                        <CardDescription>No troll please, merci (surtout Frost).</CardDescription>
                                     </CardHeader>
 
                                     <CardContent className="space-y-5">

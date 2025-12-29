@@ -34,14 +34,14 @@ export default async function Home() {
 
       <div className="z-10 text-center space-y-8 p-8 backdrop-blur-sm rounded-xl border border-white/10 bg-black/20">
         <h1 className="text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-500">
-          Midnight Roster
+          Bienvenue sur le Saint Doc 12.0
         </h1>
 
         <TypingAnimation
           className="text-2xl font-light text-muted-foreground"
           duration={50}
         >
-          Prepare for the next adventure.
+          Ouais d'accord ouais
         </TypingAnimation>
 
         <div className="pt-8">
