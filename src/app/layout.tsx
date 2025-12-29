@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WoW Roster App",
-  description: "Roster Management",
+  title: "Saint Doc 12.0",
+  description: "Midnight Roster Management",
 };
 
 import { MusicProvider } from "@/components/music-context";
