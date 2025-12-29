@@ -1,0 +1,102 @@
+{
+  "Intellect": [
+    "RIGHT+1: countifs(mainclass,\"Mage\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Mage\")"
+  ],
+  "Attack Power": [
+    "RIGHT+1: countifs(mainclass,\"Warrior\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Warrior\")"
+  ],
+  "Stamina": [
+    "RIGHT+1: countifs(mainclass,\"Priest\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Priest\")"
+  ],
+  "3% DR": [
+    "RIGHT+1: countifs(mainclass,\"Paladin\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Paladin\")"
+  ],
+  "5% Phys": [
+    "RIGHT+1: countifs(mainclass,\"Monk\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Monk\")"
+  ],
+  "3% Magic": [
+    "RIGHT+1: countifs(mainclass,\"Demon Hunter\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Demon Hunter\")"
+  ],
+  "3% Vers": [
+    "RIGHT+1: countifs(mainclass,\"Druid\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Druid\")"
+  ],
+  "Lust": [
+    "RIGHT+1: countifs(mainclass,\"Mage\",bench,\"FALSE\")+countifs(mainclass,\"Shaman\",bench,\"FALSE\")+countifs(mainclass,\"Evoker\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Mage\")+countif(altclass,\"Shaman\")+countif(altclass,\"Evoker\")"
+  ],
+  "Knock": [
+    "RIGHT+1: countifs(mainclass,\"Evoker\",bench,\"FALSE\")+countifs(mainclass,\"Monk\",bench,\"FALSE\")+countifs(mainclass,\"Druid\",bench,\"FALSE\")+countifs(mainclass,\"Shaman\",bench,\"FALSE\")+countifs(mainclass,\"Hunter\",bench,\"FALSE\")+countifs(mainclass,\"Mage\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Evoker\")+countif(altclass,\"Monk\")+countif(altclass,\"Druid\")+countif(altclass,\"Shaman\")+countif(altclass,\"Hunter\")+countif(altclass,\"Mage\")"
+  ],
+  "Combat Res": [
+    "RIGHT+1: countifs(mainclass,\"Druid\",bench,\"FALSE\")+countifs(mainclass,\"Warlock\",bench,\"FALSE\")+countifs(mainclass,\"Death Knight\",bench,\"FALSE\")+countifs(mainclass,\"Paladin\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Druid\")+countif(altclass,\"Warlock\")+countif(altclass,\"Death Knight\")+countif(altclass,\"Paladin\")+countif(mainclass,\"Druid\")+countif(mainclass,\"Warlock\")+countif(mainclass,\"Death Knight\")+countif(mainclass,\"Paladin\")"
+  ],
+  "Soothe": [
+    "RIGHT+1: countifs(mainclass,\"Evoker\",bench,\"FALSE\")+countifs(mainclass,\"Monk\",bench,\"FALSE\")+countifs(mainclass,\"Druid\",bench,\"FALSE\")+countifs(mainclass,\"Hunter\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Evoker\")+countif(altclass,\"Monk\")+countif(altclass,\"Druid\")+countif(altclass,\"Hunter\")"
+  ],
+  "Purge": [
+    "RIGHT+1: countifs(mainclass,\"Priest\",bench,\"FALSE\")+countifs(mainclass,\"Mage\",bench,\"FALSE\")+countifs(mainclass,\"Shaman\",bench,\"FALSE\")+countifs(mainclass,\"Hunter\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Priest\")+countif(altclass,\"Mage\")+countif(altclass,\"Shaman\")+countif(altclass,\"Hunter\")"
+  ],
+  "Mass Dispel": [
+    "RIGHT+1: countifs(mainclass,\"Priest\",bench,\"FALSE\")+countifs(mspec,\"Mistweaver\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Priest\")+countif(mospec,\"Mistweaver\")+countif(aospec,\"Mistweaver\")+countif(aspec,\"Mistweaver\")"
+  ],
+  "Innervate": [
+    "RIGHT+1: countifs(mainclass,\"Druid\",bench,\"FALSE\")",
+    "RIGHT+2: COUNTIF(altclass,\"Druid\")"
+  ],
+  "Shield": [
+    "RIGHT+1: countifs(mainclass,\"Evoker\",bench,\"FALSE\")+countifs(mainclass,\"Warrior\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Evoker\")+countif(altclass,\"Warrior\")"
+  ],
+  "Grip": [
+    "RIGHT+1: countifs(mainclass,\"Death Knight\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Death Knight\")"
+  ],
+  "Cheat Death": [
+    "RIGHT+1: countifs(mainclass,\"Rogue\",bench,\"FALSE\")+countifs(mspec,\"Augmentation\",bench,\"FALSE\")+countifs(mspec,\"Fire\",bench,\"FALSE\")+countifs(mspec,\"Vengeance\",bench,\"FALSE\")+countifs(mspec,\"Blood\",bench,\"FALSE\")+countifs(mainclass,\"Priest\",mspec,\"Holy\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Rogue\")+countif(aspec,\"Augmentation\")+countif(aspec,\"Fire\")+countif(aspec,\"Vengeance\")+countif(aspec,\"Blood\")+countifs(mainclass,\"Priest\",aspec,\"Holy\")+countif(mospec,\"Augmentation\")+countif(mospec,\"Fire\")+countif(mospec,\"Vengeance\")+countif(mospec,\"Blood\")+countif(aospec,\"Augmentation\")+countif(aospec,\"Fire\")+countif(aospec,\"Vengeance\")+countif(aospec,\"Blood\")+countifs(altclass,\"Priest\",aspec,\"Holy\")+countifs(altclass,\"Priest\",aospec,\"Holy\")"
+  ],
+  "Rallying Cry": [
+    "RIGHT+1: countifs(mainclass,\"Warrior\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Warrior\")"
+  ],
+  "Darkness": [
+    "RIGHT+1: countifs(mainclass,\"Demon Hunter\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Demon Hunter\")"
+  ],
+  "Immunities": [
+    "RIGHT+1: countifs(mainclass,\"Paladin\",bench,\"FALSE\")+countifs(mainclass,\"Mage\",bench,\"FALSE\")+countifs(mainclass,\"Hunter\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Paladin\")+countif(altclass,\"Mage\")+countif(altclass,\"Hunter\")"
+  ],
+  "Skyfury": [
+    "RIGHT+1: countifs(mainclass,\"Shaman\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Shaman\")"
+  ],
+  "Boss DR": [
+    "RIGHT+1: countifs(mainclass,\"Rogue\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Rogue\")"
+  ],
+  "Dragons": [
+    "RIGHT+1: countifs(mainclass,\"Evoker\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Evoker\")"
+  ],
+  "Execute Damage": [
+    "RIGHT+1: countifs(mainclass,\"Warrior\",bench,\"FALSE\")+countifs(mainclass,\"Paladin\",bench,\"FALSE\")+countifs(mainclass,\"Priest\",bench,\"FALSE\")+countifs(mainclass,\"Hunter\",bench,\"FALSE\")+countifs(mspec,\"Fire\",bench,\"FALSE\")+countifs(mspec,\"Assassination\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Warrior\")+countif(altclass,\"Paladin\")+countif(altclass,\"Priest\")+countif(altclass,\"Hunter\")+countif(aspec,\"Fire\")+countif(aspec,\"Assassination\")+countif(aospec,\"Fire\")+countif(aospec,\"Assassination\")"
+  ],
+  "Cast Speed": [
+    "RIGHT+1: countifs(mainclass,\"Rogue\",bench,\"FALSE\")+countifs(mainclass,\"Warlock\",bench,\"FALSE\")",
+    "RIGHT+2: countif(altclass,\"Rogue\")+countif(altclass,\"Warlock\")"
+  ]
+}

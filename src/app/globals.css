@@ -1,26 +1,336 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+
+/* ===== AWWWARDS DARK GLASSMORPHISM THEME ===== */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes rainbow {
+    0% {
+      background-position: 0%;
+    }
+
+    100% {
+      background-position: 200%;
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes glow-pulse {
+
+    0%,
+    100% {
+      opacity: 0.6;
+    }
+
+    50% {
+      opacity: 1;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  --radius: 0.75rem;
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: rgba(24, 24, 27, 0.6);
+  --card-foreground: #fafafa;
+  --popover: rgba(24, 24, 27, 0.9);
+  --popover-foreground: #fafafa;
+  --primary: #a855f7;
+  --primary-foreground: #fafafa;
+  --secondary: rgba(39, 39, 42, 0.8);
+  --secondary-foreground: #fafafa;
+  --muted: rgba(39, 39, 42, 0.5);
+  --muted-foreground: #a1a1aa;
+  --accent: #22d3ee;
+  --accent-foreground: #09090b;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #a855f7;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-foreground min-h-screen;
+    background-color: #09090b;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.15), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(139, 92, 246, 0.1), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 100%, rgba(34, 211, 238, 0.08), transparent);
+    background-attachment: fixed;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.015;
+    z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+}
+
+/* ===== GLASSMORPHISM CARD ===== */
+.glass-card {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: rgba(24, 24, 27, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* ===== FLOATING HUD ===== */
+.glass-hud {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  background: rgba(9, 9, 11, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 80px rgba(139, 92, 246, 0.1);
+}
+
+/* ===== NEON GLOW UTILITIES ===== */
+.neon-glow {
+  text-shadow:
+    0 0 5px currentColor,
+    0 0 20px currentColor,
+    0 0 40px currentColor;
+}
+
+.neon-border {
+  box-shadow:
+    0 0 5px currentColor,
+    0 0 20px currentColor,
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+/* ===== WOW CLASS COLORS ===== */
+.class-warrior {
+  --class-color: #C79C6E;
+  color: #C79C6E;
+}
+
+.class-paladin {
+  --class-color: #F58CBA;
+  color: #F58CBA;
+}
+
+.class-hunter {
+  --class-color: #ABD473;
+  color: #ABD473;
+}
+
+.class-rogue {
+  --class-color: #FFF569;
+  color: #FFF569;
+}
+
+.class-priest {
+  --class-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+.class-death-knight {
+  --class-color: #C41F3B;
+  color: #C41F3B;
+}
+
+.class-shaman {
+  --class-color: #0070DE;
+  color: #0070DE;
+}
+
+.class-mage {
+  --class-color: #40C7EB;
+  color: #40C7EB;
+}
+
+.class-warlock {
+  --class-color: #8787ED;
+  color: #8787ED;
+}
+
+.class-monk {
+  --class-color: #00FF96;
+  color: #00FF96;
+}
+
+.class-druid {
+  --class-color: #FF7D0A;
+  color: #FF7D0A;
+}
+
+.class-demon-hunter {
+  --class-color: #A330C9;
+  color: #A330C9;
+}
+
+.class-evoker {
+  --class-color: #33937F;
+  color: #33937F;
+}
+
+.class-glow {
+  text-shadow: 0 0 8px var(--class-color, currentColor), 0 0 16px var(--class-color, currentColor);
+}
+
+.class-border-glow {
+  border-color: var(--class-color, currentColor);
+  box-shadow: 0 0 10px var(--class-color, currentColor), inset 0 0 5px rgba(255, 255, 255, 0.05);
+}
+
+/* ===== ROSTER ROW CARD ===== */
+.roster-row {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: rgba(24, 24, 27, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.roster-row:hover {
+  background: rgba(39, 39, 42, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+/* ===== BUFF ICON ===== */
+.buff-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  background: rgba(24, 24, 27, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.buff-icon.active {
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3), inset 0 0 10px rgba(34, 197, 94, 0.1);
+}
+
+.buff-icon.missing {
+  border-color: rgba(239, 68, 68, 0.3);
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.heading-display {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heading-glow {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.5));
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
 }
