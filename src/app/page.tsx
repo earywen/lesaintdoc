@@ -17,6 +17,13 @@ export default async function Home() {
 
   return (
     <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-background">
+      {/* Wallpaper Background - Subtle */}
+      <div
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat blur-sm scale-105"
+        style={{ backgroundImage: "url('/wallpaper.jpg')" }}
+      />
+      {/* Dark Overlay for Glassmorphism Effect */}
+      <div className="fixed inset-0 bg-black/85" />
       <Particles
         className="absolute inset-0 z-0"
         quantity={200}
