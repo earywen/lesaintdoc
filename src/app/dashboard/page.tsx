@@ -122,7 +122,7 @@ export default async function DashboardPage() {
         <div className="min-h-screen relative">
             {/* Wallpaper Background - Subtle */}
             <div
-                className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+                className="fixed inset-0 bg-cover bg-center bg-no-repeat blur-sm scale-105"
                 style={{ backgroundImage: "url('/wallpaper.jpg')" }}
             />
             {/* Dark Overlay for Glassmorphism Effect */}
