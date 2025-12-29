@@ -54,36 +54,63 @@ export function MusicControls() {
                         </SheetHeader>
                         <ScrollArea className="h-[calc(100vh-100px)] mt-6 pr-4">
                             <div className="text-muted-foreground space-y-4 text-sm leading-relaxed whitespace-pre-line font-medium">
-                                {`[Couplet 1]
-                                C'est l'histoire d'un doc, un sacré numéro,
-                                Dans les raids de minuit, c'est notre héros.
-                                Il soigne les blessures, il remonte les vies,
-                                Mais attention au pull, ou c'est la panique !
+                                {`[Verse 1]
+Le vingt-quatre au soir, sous le sapin de Noël
+Zay-nith attendait son cadeau providentiel
+Pas de jouets, pas d'argent, il criait au scandale
+"JE VEUX LE GOU-GUEUL SHEET !" pour son cadeau final !
+Il a ri-fresh la page, jusqu'au petit matin
+Mais le fichier n'était pas là, quel triste destin !
+(Triste destin !)
 
-                                [Refrain]
-                                Le Saint Doc, Le Saint Doc,
-                                Il nous carry, il nous shock.
-                                Avec ses hots et ses shields,
-                                Sur le dps meter il build !
+[Chorus]
+MID-NIGHT ! Les ténèbres nous appellent !
+Mais avant de partir, remplis le bordel !
+Bli-zard fait n'importe quoi, les ad-onze sont cassés !
+On sait même pas si l'extension va nous haï-per !
+Le Ross-teur se prépare, pour le mois de Mars
+Arrêtez de paniquer, arrêtez la farce !
+MID-NIGHT !
 
-                                [Pont]
-                                (Instrumental épique)
+[Verse 2]
+On regarde les logs, on regarde la Mé-ta
+Mais y'a une certitude qui ne bougera pas
+Peu importe la classe, peu importe le look
+Le Tank le plus pété, sera joué par Xorouk !
+Il a déjà ri-roll, quarante-douze fois
+Pour être sûr de tanker, comme un vrai Roi !
+(Comme un Roi !)
 
-                                [Couplet 2]
-                                Quand le tank prend cher, il est toujours là,
-                                Un petit dispell et ça repart comme ça.
-                                Il crie sur discord "Bougez des aoe !",
-                                Et on l'écoute tous, c'est notre dieu.
+[Chorus]
+MID-NIGHT! Les ténèbres nous appellent !
+Mais avant de partir, remplis le bordel !
+Bli-zard fait n'importe quoi, les ad-onze sont cassés !
+On sait même pas si l'extension va nous haï-per !
+Le Ross-teur se prépare, pour le mois de Mars
+Arrêtez de paniquer, arrêtez la farce !
 
-                                [Refrain]
-                                Le Saint Doc, Le Saint Doc,
-                                Il nous carry, il nous shock.
-                                Avec ses hots et ses shields,
-                                Sur le dps meter il build !
+[Bridge - Slow, Ominous, Whispered then Screaming]
+Le silence d'Air-ri-wenn... pèse sur nos âmes...
+L'entretien n'a pas eu lieu... rangez vos lames...
+Personne ne sait... Si on est pris...
+OU SI ON EST VIRÉ !!!
+(VIRÉÉÉÉÉÉ !)
 
-                                [Outro]
-                                12.0 c'est son patch, c'est son moment,
-                                Le Saint Doc, pour toujours, éternellement.
+[Guitar Solo - Melodic and Shredding]
+
+[Verse 3]
+Alors connecte-toi, sur le nouveau site
+Avant que le G-M, ne te déshérite !
+Fais tes choix de classe, coche tes dispos
+Sinon tu finiras, sur un jeu solo !
+L'hiver est fini, le printemps arrive
+Rejoignez le raid, ou partez à la dérive !
+
+[Outro]
+Zay-nith a son fichier...
+Xorouk a son Tank...
+Air-ri-wenn vous juge...
+MID-NIGHT !
                                 `}
                             </div>
                         </ScrollArea>
