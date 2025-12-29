@@ -130,11 +130,10 @@ export function SystemStatusPanel({ coverage, analysis }: SystemStatusPanelProps
     // Find roster players who provide a specific buff
     const getProviders = (buffId: string): { name: string; className: string }[] => {
         const providers = PROVIDER_MAP[buffId] || [];
-        const confirmed = analysis.players.filter(p =>
-            p.status === "confirmed"
-        );
+        // Include all players regardless of status (matching buff count logic)
+        const allPlayers = analysis.players;
 
-        return confirmed
+        return allPlayers
             .filter(p => {
                 return providers.some(prov => {
                     const classMatch = prov.class === p.mainClass;
