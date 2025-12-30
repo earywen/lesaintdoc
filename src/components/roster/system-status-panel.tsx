@@ -96,7 +96,7 @@ function BuffRow({
                     </span>
                 </div>
             </TooltipTrigger>
-            <TooltipContent side="top" className="w-fit min-w-[120px]">
+            <TooltipContent side="right" className="w-fit min-w-[120px]">
                 {providers.length > 0 ? (
                     <div className="text-xs space-y-0.5">
                         {providers.map((p, i) => {
