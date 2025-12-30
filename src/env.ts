@@ -8,6 +8,9 @@ export const env = createEnv({
         DISCORD_CLIENT_SECRET: z.string().min(1),
         BETTER_AUTH_SECRET: z.string().optional(), // Often needed for Better Auth production
         BETTER_AUTH_URL: z.string().url().optional(), // Server side URL if needed
+        GOOGLE_SERVICE_ACCOUNT_EMAIL: z.string().email(),
+        GOOGLE_PRIVATE_KEY: z.string().min(1),
+        GOOGLE_SHEET_ID: z.string().min(1),
     },
     client: {
         NEXT_PUBLIC_BETTER_AUTH_URL: z.string().url(),

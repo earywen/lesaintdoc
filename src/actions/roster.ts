@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { rosterEntries } from "@/db/schema";
+import { rosterEntries, user } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { eq } from "drizzle-orm";
@@ -9,6 +9,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { safeAction } from "@/lib/safe-action";
 import { z } from "zod";
 import type { Session } from "@/lib/auth-types";
+import { syncToSheet } from "@/lib/sheets";
 
 // Input Schemas
 const updateRosterSchema = z.object({
@@ -69,6 +70,30 @@ export const updateRosterEntry = async (input: z.infer<typeof updateRosterSchema
 
         revalidateTag("roster", "max");
         revalidatePath("/dashboard");
+
+        // Google Sheets Sync
+        try {
+            const userInfo = await db.query.user.findFirst({
+                where: eq(user.id, entry.userId),
+            });
+
+            if (userInfo) {
+                await syncToSheet({
+                    name: userInfo.name,
+                    mainClass: data.mainClass,
+                    mainSpec: data.mainSpec,
+                    offSpec: data.offSpec || "",
+                    altClass: data.altClass || "",
+                    altSpec: data.altSpec || "",
+                    note: data.notes || "",
+                    status: data.status,
+                });
+            }
+        } catch (error) {
+            console.error("Failed to sync to Google Sheets:", error);
+            // Non-blocking error
+        }
+
         return { success: true };
     }, input);
 };
@@ -154,6 +179,26 @@ export const createRosterEntry = async (input: z.infer<typeof createRosterSchema
 
         revalidateTag("roster", "max");
         revalidatePath("/dashboard");
+
+        // Google Sheets Sync
+        try {
+            const userInfo = await db.query.user.findFirst({
+                where: eq(user.id, userId),
+            });
+
+            if (userInfo) {
+                await syncToSheet({
+                    name: userInfo.name,
+                    mainClass: data.mainClass,
+                    mainSpec: data.mainSpec,
+                    status: data.status,
+                    note: data.notes || "",
+                });
+            }
+        } catch (error) {
+            console.error("Failed to sync to Google Sheets:", error);
+        }
+
         return { success: true };
     }, input);
 };
