@@ -133,9 +133,9 @@ export function EditRosterDialog({
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="pending">⏳ Pending</SelectItem>
-                                <SelectItem value="confirmed">✅ Confirmed</SelectItem>
-                                <SelectItem value="apply">👋 Apply</SelectItem>
+                                <SelectItem value="pending">Pending</SelectItem>
+                                <SelectItem value="confirmed">Confirmed</SelectItem>
+                                <SelectItem value="apply">Apply</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>

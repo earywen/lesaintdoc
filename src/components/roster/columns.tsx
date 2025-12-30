@@ -117,23 +117,27 @@ export const getColumns = (currentUser: any): ColumnDef<RosterMember>[] => [
         },
         cell: ({ row }) => {
             const status = row.original.status as string;
-            // Status styling
-            let color = "zinc";
-            let icon = "⚪";
-            let display = "";
+            // Status styling - colored text without emojis
+            let colorClass = "text-zinc-500";
+            let display = status;
 
-            if (status === "confirmed") { color = "emerald"; icon = "✅"; display = "Confirmed" }
-            if (status === "pending") { color = "amber"; icon = "⏳"; display = "Pending" }
-            if (status === "apply") { color = "blue"; icon = "👋"; display = "Apply" }
-
-            // Fallback for legacy
-            if (!display) { display = status; icon = "❓"; }
+            if (status === "confirmed") {
+                colorClass = "text-emerald-400";
+                display = "Confirmed";
+            }
+            if (status === "pending") {
+                colorClass = "text-amber-400";
+                display = "Pending";
+            }
+            if (status === "apply") {
+                colorClass = "text-violet-400";
+                display = "Apply";
+            }
 
             return (
-                <div className="flex items-center gap-2">
-                    <span>{icon}</span>
-                    <span className="capitalize">{display}</span>
-                </div>
+                <span className={`font-medium ${colorClass}`}>
+                    {display}
+                </span>
             )
         },
         filterFn: (row, id, value) => {
