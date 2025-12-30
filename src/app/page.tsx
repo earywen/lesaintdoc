@@ -20,7 +20,7 @@ export default async function Home() {
       {/* Wallpaper Background - Subtle */}
       <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat blur-sm scale-105"
-        style={{ backgroundImage: "url('/wallpaper.jpg')" }}
+        style={{ backgroundImage: "url('/wallpaper.webp')" }}
       />
       {/* Dark Overlay for Glassmorphism Effect */}
       <div className="fixed inset-0 bg-black/85" />
