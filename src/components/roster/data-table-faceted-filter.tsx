@@ -104,6 +104,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                                                 filterValues.length ? filterValues : undefined
                                             )
                                         }}
+                                        className="data-[selected=true]:bg-zinc-800"
                                     >
                                         <div
                                             className={cn(
