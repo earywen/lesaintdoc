@@ -13,8 +13,10 @@ import {
     getFilteredRowModel,
     getFacetedRowModel,
     getFacetedUniqueValues,
+    getPaginationRowModel,
 } from "@tanstack/react-table"
 import { DataTableToolbar } from "./data-table-toolbar"
+import { DataTablePagination } from "./data-table-pagination"
 
 import {
     Table,
@@ -49,6 +51,12 @@ export function RosterDataTable<TData, TValue>({
         getFilteredRowModel: getFilteredRowModel(),
         getFacetedRowModel: getFacetedRowModel(),
         getFacetedUniqueValues: getFacetedUniqueValues(),
+        getPaginationRowModel: getPaginationRowModel(),
+        initialState: {
+            pagination: {
+                pageSize: 50,
+            }
+        },
         state: {
             sorting,
             columnFilters,
@@ -105,6 +113,7 @@ export function RosterDataTable<TData, TValue>({
                     </TableBody>
                 </Table>
             </div>
+            <DataTablePagination table={table} />
         </div>
     )
 }

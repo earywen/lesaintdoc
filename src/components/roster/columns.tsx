@@ -25,46 +25,30 @@ const NoteCell = ({ note }: { note: string }) => {
     const [isTruncated, setIsTruncated] = useState(false)
     const ref = useRef<HTMLSpanElement>(null)
 
-    useEffect(() => {
-        const checkTruncation = () => {
-            if (ref.current) {
-                // Check if scrollWidth is greater than clientWidth
-                // We add a small buffer (1px) to avoid false positives due to sub-pixel rendering
-                setIsTruncated(ref.current.scrollWidth > ref.current.clientWidth + 1)
-            }
+    const checkTruncation = () => {
+        if (ref.current) {
+            setIsTruncated(ref.current.scrollWidth > ref.current.clientWidth + 1)
         }
-
-        // Check initially and on resize
-        checkTruncation()
-        window.addEventListener("resize", checkTruncation)
-
-        return () => {
-            window.removeEventListener("resize", checkTruncation)
-        }
-    }, [note])
-
-    const content = (
-        <span
-            ref={ref}
-            className="text-xs text-zinc-400 max-w-[200px] truncate block cursor-default"
-        >
-            {note}
-        </span>
-    )
-
-    if (!isTruncated) {
-        return content
     }
 
+    // Only render the tooltip wrapper if we detected truncation
+    // We check on mouse enter to avoid expensive layout reads on mount
     return (
         <TooltipProvider>
-            <Tooltip delayDuration={100}>
-                <TooltipTrigger asChild>
-                    {content}
+            <Tooltip delayDuration={300}>
+                <TooltipTrigger asChild onMouseEnter={checkTruncation}>
+                    <span
+                        ref={ref}
+                        className="text-xs text-zinc-400 max-w-[200px] truncate block cursor-default"
+                    >
+                        {note}
+                    </span>
                 </TooltipTrigger>
-                <TooltipContent className="max-w-[300px] text-wrap break-words bg-zinc-900 border-zinc-800 text-zinc-300">
-                    <p>{note}</p>
-                </TooltipContent>
+                {isTruncated && (
+                    <TooltipContent className="max-w-[300px] text-wrap break-words bg-zinc-900 border-zinc-800 text-zinc-300">
+                        <p>{note}</p>
+                    </TooltipContent>
+                )}
             </Tooltip>
         </TooltipProvider>
     )
