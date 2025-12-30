@@ -1,6 +1,8 @@
 
 "use client"
 
+import { useState, useRef, useEffect } from "react"
+
 import { ColumnDef } from "@tanstack/react-table"
 import { CLASSES } from "@/lib/wow-constants"
 import { Badge } from "@/components/ui/badge"
@@ -18,6 +20,55 @@ import {
 import { RosterAnalysis } from "@/lib/roster-logic";
 
 export type RosterMember = RosterAnalysis["players"][0];
+
+const NoteCell = ({ note }: { note: string }) => {
+    const [isTruncated, setIsTruncated] = useState(false)
+    const ref = useRef<HTMLSpanElement>(null)
+
+    useEffect(() => {
+        const checkTruncation = () => {
+            if (ref.current) {
+                // Check if scrollWidth is greater than clientWidth
+                // We add a small buffer (1px) to avoid false positives due to sub-pixel rendering
+                setIsTruncated(ref.current.scrollWidth > ref.current.clientWidth + 1)
+            }
+        }
+
+        // Check initially and on resize
+        checkTruncation()
+        window.addEventListener("resize", checkTruncation)
+
+        return () => {
+            window.removeEventListener("resize", checkTruncation)
+        }
+    }, [note])
+
+    const content = (
+        <span
+            ref={ref}
+            className="text-xs text-zinc-400 max-w-[200px] truncate block cursor-default"
+        >
+            {note}
+        </span>
+    )
+
+    if (!isTruncated) {
+        return content
+    }
+
+    return (
+        <TooltipProvider>
+            <Tooltip delayDuration={100}>
+                <TooltipTrigger asChild>
+                    {content}
+                </TooltipTrigger>
+                <TooltipContent className="max-w-[300px] text-wrap break-words bg-zinc-900 border-zinc-800 text-zinc-300">
+                    <p>{note}</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
+    )
+}
 
 export const getColumns = (currentUser: any): ColumnDef<RosterMember>[] => [
     {
@@ -156,20 +207,7 @@ export const getColumns = (currentUser: any): ColumnDef<RosterMember>[] => [
         cell: ({ row }) => {
             const notes = row.original.notes;
             if (!notes) return <span className="text-zinc-700">-</span>;
-            return (
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <span className="text-xs text-zinc-400 max-w-[200px] truncate block cursor-default">
-                                {notes}
-                            </span>
-                        </TooltipTrigger>
-                        <TooltipContent className="max-w-[300px] text-wrap break-words bg-zinc-900 border-zinc-800 text-zinc-300">
-                            <p>{notes}</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-            );
+            return <NoteCell note={notes} />;
         }
     },
     {
