@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -121,7 +121,7 @@ export function EditRosterDialog({
             <DialogContent className="sm:max-w-[500px] bg-zinc-900 border-zinc-700">
                 <DialogHeader>
                     <DialogTitle>Edit {playerName}</DialogTitle>
-                    <p className="text-sm text-muted-foreground">Configure main and alt characters.</p>
+                    <DialogDescription>Configure main and alt characters.</DialogDescription>
                 </DialogHeader>
 
                 <div className="space-y-4 py-3">

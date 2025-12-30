@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -96,6 +96,7 @@ export function CreateRosterDialog({ availableUsers }: CreateDialogProps) {
             <DialogContent className="sm:max-w-[500px] bg-zinc-900 border-zinc-700">
                 <DialogHeader>
                     <DialogTitle>Add to Roster</DialogTitle>
+                    <DialogDescription>Select a member and configure their main character.</DialogDescription>
                 </DialogHeader>
 
                 <div className="space-y-4 py-3">
