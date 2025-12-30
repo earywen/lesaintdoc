@@ -7,6 +7,7 @@ import { analyzeRoster } from "@/lib/roster-logic";
 import { auth } from "@/lib/auth";
 import { Suspense } from "react";
 import { RefreshButton } from "@/components/refresh-button";
+import { SyncButton } from "@/components/roster/sync-button";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { RosterClient } from "@/components/roster/roster-client";
@@ -161,6 +162,7 @@ export default async function DashboardPage() {
                                 Le Saint Doc 12.0
                             </h1>
                             <RefreshButton />
+                            <SyncButton isAdmin={currentUser.role === "admin"} />
                         </div>
                         <p className="text-sm text-muted-foreground">
                             Midnight • {analysis.confirmedPlayers} raiders confirmed

@@ -12,6 +12,44 @@ import type { Session } from "@/lib/auth-types";
 import { syncToSheet } from "@/lib/sheets";
 
 // Input Schemas
+const syncAllSchema = z.object({});
+
+export const syncAllToSheet = async () => {
+    return safeAction(syncAllSchema, async () => {
+        const session = await auth.api.getSession({
+            headers: await headers(),
+        });
+
+        if (!session || (session.user as Session["user"]).role !== "admin") {
+            throw new Error("Unauthorized");
+        }
+
+        const entries = await db.query.rosterEntries.findMany({
+            with: {
+                user: true // Ensure we get user data
+            }
+        });
+
+        console.log(`Syncing ${entries.length} entries to Sheets...`);
+
+        // Serial execution to avoid rate limiting
+        for (const entry of entries) {
+            await syncToSheet({
+                name: entry.user.name,
+                mainClass: entry.mainClass,
+                mainSpec: entry.mainSpec,
+                offSpec: entry.offSpec || "",
+                altClass: entry.altClass || "",
+                altSpec: entry.altSpec || "",
+                note: entry.notes || "",
+                status: entry.status || "pending",
+            });
+        }
+
+        return { success: true, count: entries.length };
+    }, {});
+};
+
 const updateRosterSchema = z.object({
     entryId: z.string(),
     data: z.object({

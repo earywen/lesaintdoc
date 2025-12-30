@@ -1,5 +1,6 @@
 
 import { pgTable, text, boolean, timestamp, uuid, pgEnum } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 
 // Define Enums
 export const roleEnum = pgEnum('user_role', ['admin', 'member']);
@@ -80,6 +81,13 @@ export const rosterEntries = pgTable("roster_entries", {
 
     updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+export const rosterRelations = relations(rosterEntries, ({ one }) => ({
+    user: one(user, {
+        fields: [rosterEntries.userId],
+        references: [user.id],
+    }),
+}));
 
 // Zod Schemas
 import { createSelectSchema, createInsertSchema } from "drizzle-zod";
