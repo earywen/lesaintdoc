@@ -42,12 +42,12 @@ export function RefreshButton() {
                         size="icon"
                         onClick={handleRefresh}
                         disabled={isPending}
-                        className="h-8 w-8 text-muted-foreground hover:text-white"
+                        className="h-9 w-9 text-muted-foreground hover:text-white"
                         aria-label="Actualiser les données"
                     >
                         <RefreshCw
                             className={cn(
-                                "h-4 w-4 transition-all duration-700",
+                                "h-5 w-5 transition-all duration-700",
                                 (isPending || rotated) ? "animate-spin" : ""
                             )}
                         />

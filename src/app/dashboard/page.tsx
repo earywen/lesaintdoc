@@ -156,16 +156,18 @@ export default async function DashboardPage() {
                 {/* Header */}
                 <header className="flex items-center justify-between mb-6">
                     <div>
-                        <h1 className="text-3xl font-bold heading-glow">
-                            Le Saint Doc 12.0
-                        </h1>
+                        <div className="flex items-center gap-3">
+                            <h1 className="text-3xl font-bold heading-glow">
+                                Le Saint Doc 12.0
+                            </h1>
+                            <RefreshButton />
+                        </div>
                         <p className="text-sm text-muted-foreground">
                             Midnight • {analysis.confirmedPlayers} raiders confirmed
                         </p>
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <RefreshButton />
                         <MusicControls />
                         <div className="text-right text-xs text-muted-foreground border-l border-white/10 pl-4">
                             <p>Logged in as <span className="text-white font-medium">{session.user.name}</span></p>
