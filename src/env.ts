@@ -11,6 +11,7 @@ export const env = createEnv({
         GOOGLE_SERVICE_ACCOUNT_EMAIL: z.string().email(),
         GOOGLE_PRIVATE_KEY: z.string().min(1),
         GOOGLE_SHEET_ID: z.string().min(1),
+        DISCORD_WEBHOOK_URL: z.string().url(),
     },
     client: {
         NEXT_PUBLIC_BETTER_AUTH_URL: z.string().url(),

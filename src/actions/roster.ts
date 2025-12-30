@@ -10,6 +10,7 @@ import { safeAction } from "@/lib/safe-action";
 import { z } from "zod";
 import type { Session } from "@/lib/auth-types";
 import { syncToSheet } from "@/lib/sheets";
+import { sendRosterJoin, sendRosterUpdate } from "@/lib/discord";
 
 // Input Schemas
 const syncAllSchema = z.object({});
@@ -116,8 +117,18 @@ export const updateRosterEntry = async (input: z.infer<typeof updateRosterSchema
             });
 
             if (userInfo) {
+                // Discord Notification
+                const changes: string[] = [];
+                if (entry.mainClass !== data.mainClass) changes.push(`Classe: ${entry.mainClass} ➔ ${data.mainClass}`);
+                if (entry.mainSpec !== data.mainSpec) changes.push(`Spé: ${entry.mainSpec} ➔ ${data.mainSpec}`);
+                if (entry.status !== data.status) changes.push(`Statut: ${entry.status || "pending"} ➔ ${data.status}`);
+
+                if (changes.length > 0) {
+                    await sendRosterUpdate(userInfo.name, changes);
+                }
+
                 await syncToSheet({
-                    name: userInfo.name,
+                    name: userInfo.name, // Ensure this property is correctly referenced
                     mainClass: data.mainClass,
                     mainSpec: data.mainSpec,
                     offSpec: data.offSpec || "",
@@ -225,6 +236,8 @@ export const createRosterEntry = async (input: z.infer<typeof createRosterSchema
             });
 
             if (userInfo) {
+                await sendRosterJoin(userInfo.name, data.mainClass, data.mainSpec);
+
                 await syncToSheet({
                     name: userInfo.name,
                     mainClass: data.mainClass,
