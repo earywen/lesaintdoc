@@ -105,9 +105,12 @@ export default async function DashboardPage() {
         redirect("/access-denied");
     }
 
-    const currentUserWithRole = await getUserWithRole(session.user.id);
-    const rosterData = await getCachedRosterData();
-    const availableUsers = await getCachedAvailableUsers();
+    // Parallel data fetching to avoid waterfalls
+    const [currentUserWithRole, rosterData, availableUsers] = await Promise.all([
+        getUserWithRole(session.user.id),
+        getCachedRosterData(),
+        getCachedAvailableUsers()
+    ]);
 
     const analysis = analyzeRoster(rosterData);
     const fullCoverage = analyzeFullCoverage(analysis.players);

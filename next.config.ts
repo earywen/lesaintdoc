@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // React 16.1 Cache Components (PPR)
+  cacheComponents: true,
+
   // Optimisations de bundle
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
