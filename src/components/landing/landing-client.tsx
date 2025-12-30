@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 export function LandingClient() {
-    // 27 Janvier 2025 à 23h59
-    const TARGET_DATE = new Date("2025-01-27T23:59:00");
+    // 27 Janvier 2026 à 23h59
+    const TARGET_DATE = new Date("2026-01-27T23:59:00");
 
     // Initial state check
     const [isReleased, setIsReleased] = useState(false);
@@ -84,7 +84,7 @@ export function LandingClient() {
                     <Button
                         variant="ghost"
                         size="icon"
-                        className="opacity-10 hover:opacity-100 transition-opacity duration-500 hover:bg-white/10"
+                        className="opacity-20 hover:opacity-100 transition-opacity duration-500 hover:bg-white/10"
                         onClick={() => setIsAdminBypass(true)}
                         title="Admin Bypass"
                     >
