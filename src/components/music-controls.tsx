@@ -52,8 +52,8 @@ export function MusicControls() {
                                 Le Saint Doc 12.0
                             </SheetTitle>
                         </SheetHeader>
-                        <ScrollArea className="h-[calc(100vh-100px)] mt-6 pr-4">
-                            <div className="text-muted-foreground space-y-4 text-sm leading-relaxed whitespace-pre-line font-medium">
+                        <ScrollArea className="h-[calc(100vh-120px)] mt-6">
+                            <div className="text-zinc-300 space-y-4 text-sm leading-loose whitespace-pre-line font-medium px-6 pb-8">
                                 {`[Verse 1]
 Le vingt-quatre au soir, sous le sapin de Noël
 Zay-nith attendait son cadeau providentiel
