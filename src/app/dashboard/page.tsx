@@ -134,11 +134,11 @@ export default async function DashboardPage() {
             {/* Wallpaper Background - Optimized with next/image */}
             <div className="fixed inset-0 -z-20">
                 <Image
-                    src="/wallpaper.jpg"
-                    alt=""
+                    src="/wallpaper.webp"
+                    alt="World of Warcraft background"
                     fill
                     priority
-                    quality={75}
+                    quality={85}
                     className="object-cover blur-sm scale-105"
                     sizes="100vw"
                 />
