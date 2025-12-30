@@ -4,9 +4,14 @@ import { RosterMetrics } from "./roster-metrics";
 import { SystemStatusPanel } from "./system-status-panel";
 import { RosterAnalysis } from "@/lib/roster-logic";
 import { FullBuffAnalysis, ClassCount } from "@/lib/buff-logic";
-import { CreateRosterDialog } from "./create-dialog";
+import dynamic from "next/dynamic";
 import { RosterDataTable } from "./data-table";
 import { getColumns } from "./columns";
+
+const CreateRosterDialog = dynamic(() => import("./create-dialog").then(mod => mod.CreateRosterDialog), {
+    ssr: false,
+    loading: () => null
+});
 
 interface RosterClientProps {
     analysis: RosterAnalysis;
