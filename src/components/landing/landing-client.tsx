@@ -57,7 +57,7 @@ export function LandingClient() {
                     className="text-xl sm:text-2xl font-light text-muted-foreground min-h-[40px]"
                     duration={50}
                 >
-                    {showLogin ? "Accès autorisé." : "Système verrouillé jusqu'au pré-patch."}
+                    {showLogin ? "Accès autorisé." : "Encore un peu de patience les gadjo'!"}
                 </TypingAnimation>
 
                 <div className="pt-8 min-h-[150px] flex flex-col justify-center items-center">
