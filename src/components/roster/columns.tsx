@@ -171,8 +171,8 @@ export const getColumns = (currentUser: any): ColumnDef<RosterMember>[] => [
                 display = "Pending";
             }
             if (status === "apply") {
-                colorClass = "text-violet-400";
-                display = "Apply";
+                colorClass = "text-red-500 font-bold";
+                display = "OUT";
             }
 
             return (

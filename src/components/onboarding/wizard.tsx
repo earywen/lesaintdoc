@@ -74,9 +74,11 @@ export function OnboardingWizard({ userName }: OnboardingWizardProps) {
         setIsSubmitting(true);
         try {
             await submitRosterEntry({ isPlaying: false });
-            toast.success("C'est noté. Dommage ! 👋");
-            // Force reload or redirect to a goodbye page, currently just blocking access via standard flow
-            window.location.href = "/access-denied";
+            toast.success("C'est noté. On est triste de te voir partir, mais c'est comme ça ! 😢", {
+                duration: 5000,
+            });
+            // Redirect to dashboard instead of blocking
+            router.push("/dashboard");
         } catch {
             toast.error("Erreur lors de l'enregistrement du refus.");
             setIsSubmitting(false);
