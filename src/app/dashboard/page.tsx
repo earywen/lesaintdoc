@@ -12,6 +12,7 @@ import { isWhitelisted } from "@/lib/guild-whitelist";
 import { syncUserWithWhitelist } from "@/lib/sync-user";
 import { MusicControls } from "@/components/music-controls";
 import Image from "next/image";
+import { unstable_cache } from "next/cache";
 
 async function getDiscordId(userId: string): Promise<string | null> {
     const result = await db
@@ -22,36 +23,41 @@ async function getDiscordId(userId: string): Promise<string | null> {
     return result[0]?.accountId || null;
 }
 
-async function getRosterData() {
-    const data = await db
-        .select({
-            id: rosterEntries.id,
-            odaigUserId: rosterEntries.userId,
-            mainClass: rosterEntries.mainClass,
-            mainSpec: rosterEntries.mainSpec,
-            offSpec: rosterEntries.offSpec,
-            altClass: rosterEntries.altClass,
-            altSpec: rosterEntries.altSpec,
-            status: rosterEntries.status,
-            notes: rosterEntries.notes,
-            userName: user.name,
-        })
-        .from(rosterEntries)
-        .leftJoin(user, eq(rosterEntries.userId, user.id));
+// Cached roster data query - revalidates every 30s or on-demand via tag
+const getCachedRosterData = unstable_cache(
+    async () => {
+        const data = await db
+            .select({
+                id: rosterEntries.id,
+                odaigUserId: rosterEntries.userId,
+                mainClass: rosterEntries.mainClass,
+                mainSpec: rosterEntries.mainSpec,
+                offSpec: rosterEntries.offSpec,
+                altClass: rosterEntries.altClass,
+                altSpec: rosterEntries.altSpec,
+                status: rosterEntries.status,
+                notes: rosterEntries.notes,
+                userName: user.name,
+            })
+            .from(rosterEntries)
+            .leftJoin(user, eq(rosterEntries.userId, user.id));
 
-    return data.map((entry) => ({
-        id: entry.id,
-        userId: entry.odaigUserId,
-        name: entry.userName || "Unknown",
-        mainClass: entry.mainClass,
-        mainSpec: entry.mainSpec,
-        offSpec: entry.offSpec,
-        altClass: entry.altClass,
-        altSpec: entry.altSpec,
-        notes: entry.notes,
-        status: (entry.status || "pending") as "pending" | "confirmed" | "apply",
-    }));
-}
+        return data.map((entry) => ({
+            id: entry.id,
+            userId: entry.odaigUserId,
+            name: entry.userName || "Unknown",
+            mainClass: entry.mainClass,
+            mainSpec: entry.mainSpec,
+            offSpec: entry.offSpec,
+            altClass: entry.altClass,
+            altSpec: entry.altSpec,
+            notes: entry.notes,
+            status: (entry.status || "pending") as "pending" | "confirmed" | "apply",
+        }));
+    },
+    ["roster-data"],
+    { tags: ["roster"], revalidate: 30 }
+);
 
 async function getUserWithRole(userId: string) {
     const result = await db
@@ -63,16 +69,19 @@ async function getUserWithRole(userId: string) {
 }
 
 
-async function getAvailableUsers() {
-    // Single optimized query: LEFT JOIN + WHERE NULL (exclusion join pattern)
-    const result = await db
-        .select({ id: user.id, name: user.name })
-        .from(user)
-        .leftJoin(rosterEntries, eq(user.id, rosterEntries.userId))
-        .where(isNull(rosterEntries.id));
-
-    return result;
-}
+// Cached available users query
+const getCachedAvailableUsers = unstable_cache(
+    async () => {
+        const result = await db
+            .select({ id: user.id, name: user.name })
+            .from(user)
+            .leftJoin(rosterEntries, eq(user.id, rosterEntries.userId))
+            .where(isNull(rosterEntries.id));
+        return result;
+    },
+    ["available-users"],
+    { tags: ["roster", "users"], revalidate: 30 }
+);
 
 export default async function DashboardPage() {
     const session = await auth.api.getSession({
@@ -97,8 +106,8 @@ export default async function DashboardPage() {
     }
 
     const currentUserWithRole = await getUserWithRole(session.user.id);
-    const rosterData = await getRosterData();
-    const availableUsers = await getAvailableUsers();
+    const rosterData = await getCachedRosterData();
+    const availableUsers = await getCachedAvailableUsers();
 
     const analysis = analyzeRoster(rosterData);
     const fullCoverage = analyzeFullCoverage(analysis.players);

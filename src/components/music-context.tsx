@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState, useCallback } from "react";
 import { authClient } from "@/lib/auth-client";
 
 interface MusicContextType {
@@ -97,9 +97,14 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
 
-    // ... existing play/volume effects ...
+    // Throttled time update handler - limits updates to 4x per second max
+    const lastTimeUpdateRef = useRef(0);
+    const handleTimeUpdate = useCallback(() => {
+        const now = Date.now();
+        // Throttle: only update every 250ms (4 times per second)
+        if (now - lastTimeUpdateRef.current < 250) return;
+        lastTimeUpdateRef.current = now;
 
-    const handleTimeUpdate = () => {
         if (audioRef.current) {
             setCurrentTime(audioRef.current.currentTime);
             // Fallback: if duration is missing (or Infinity/NaN), try to get it again
@@ -107,7 +112,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
                 setDuration(audioRef.current.duration);
             }
         }
-    };
+    }, [duration]);
 
     const handleLoadedMetadata = () => {
         if (audioRef.current && Number.isFinite(audioRef.current.duration)) {

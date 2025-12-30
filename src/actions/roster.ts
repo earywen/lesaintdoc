@@ -5,7 +5,7 @@ import { rosterEntries } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { safeAction } from "@/lib/safe-action";
 import { z } from "zod";
 import type { Session } from "@/lib/auth-types";
@@ -67,6 +67,7 @@ export const updateRosterEntry = async (input: z.infer<typeof updateRosterSchema
             })
             .where(eq(rosterEntries.id, entryId));
 
+        revalidateTag("roster", "max");
         revalidatePath("/dashboard");
         return { success: true };
     }, input);
@@ -100,6 +101,7 @@ export const deleteRosterEntry = async (input: z.infer<typeof deleteRosterSchema
 
         await db.delete(rosterEntries).where(eq(rosterEntries.id, entryId));
 
+        revalidateTag("roster", "max");
         revalidatePath("/dashboard");
         return { success: true };
     }, input);
@@ -150,6 +152,7 @@ export const createRosterEntry = async (input: z.infer<typeof createRosterSchema
             characterType: "main",
         });
 
+        revalidateTag("roster", "max");
         revalidatePath("/dashboard");
         return { success: true };
     }, input);
