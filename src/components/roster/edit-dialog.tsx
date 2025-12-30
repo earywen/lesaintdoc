@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -22,6 +23,7 @@ export function EditRosterDialog({
     member,
     currentUser
 }: EditDialogProps) {
+    const router = useRouter();
     const {
         id: entryId,
         userId,
@@ -98,7 +100,7 @@ export function EditRosterDialog({
         if (result.success) {
             toast.success(`Updated ${playerName}`);
             setOpen(false);
-            window.location.reload();
+            router.refresh();
         } else {
             toast.error(result.error || "Failed to update");
         }
@@ -248,7 +250,7 @@ export function EditRosterDialog({
                                     if (result.success) {
                                         toast.success("Entry deleted");
                                         setOpen(false);
-                                        window.location.reload();
+                                        router.refresh();
                                     } else {
                                         toast.error(result.error || "Failed to delete");
                                     }
