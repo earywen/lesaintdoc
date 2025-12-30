@@ -167,7 +167,7 @@ export function SystemStatusPanel({ coverage, analysis }: SystemStatusPanelProps
                 </h3>
 
                 {/* Two sections side by side */}
-                <div className="flex gap-4">
+                <div className="flex flex-col md:flex-row gap-4">
                     {/* Buffs column */}
                     <div className="flex-shrink-0 min-w-[100px]">
                         <div className="text-[10px] uppercase tracking-wider font-semibold text-amber-400 border-b border-amber-500/30 pb-1 mb-1.5 flex justify-between">

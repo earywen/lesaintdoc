@@ -60,7 +60,7 @@ export function RosterDataTable<TData, TValue>({
             <DataTableToolbar table={table}>
                 {toolbarAction}
             </DataTableToolbar>
-            <div className="rounded-md border border-white/10 bg-black/20 overflow-hidden">
+            <div className="rounded-md border border-white/10 bg-black/20 overflow-hidden overflow-x-auto">
                 <Table>
                     <TableHeader className="bg-zinc-900/50">
                         {table.getHeaderGroups().map((headerGroup) => (

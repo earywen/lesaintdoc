@@ -152,12 +152,12 @@ export default async function DashboardPage() {
                 <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-3xl" />
             </div>
 
-            <div className="relative container mx-auto px-4 py-6 max-w-7xl">
+            <div className="relative container mx-auto px-4 py-6 max-w-[1600px]">
                 {/* Header */}
-                <header className="flex items-center justify-between mb-6">
+                <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                     <div>
                         <div className="flex items-center gap-3">
-                            <h1 className="text-3xl font-bold heading-glow">
+                            <h1 className="text-2xl md:text-3xl font-bold heading-glow">
                                 Le Saint Doc 12.0
                             </h1>
                             <RefreshButton />
@@ -167,9 +167,9 @@ export default async function DashboardPage() {
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="w-full md:w-auto flex flex-wrap items-center justify-between md:justify-end gap-4 bg-zinc-900/50 p-2 rounded-lg md:bg-transparent md:p-0">
                         <MusicControls />
-                        <div className="text-right text-xs text-muted-foreground border-l border-white/10 pl-4">
+                        <div className="text-right text-xs text-muted-foreground border-l border-white/10 pl-4 ml-auto md:ml-0">
                             <p>Logged in as <span className="text-white font-medium">{session.user.name}</span></p>
                             <p className={currentUser.role === "admin" ? "text-amber-400 uppercase font-bold" : "capitalize"}>
                                 {currentUser.role}
