@@ -1,7 +1,7 @@
 
 import { db } from "@/db";
 import { rosterEntries, user, account } from "@/db/schema";
-import { eq, and } from "drizzle-orm";
+import { eq, and, isNull } from "drizzle-orm";
 import { analyzeFullCoverage, analyzeClassCounts } from "@/lib/buff-logic";
 import { analyzeRoster } from "@/lib/roster-logic";
 import { auth } from "@/lib/auth";
@@ -11,6 +11,7 @@ import { RosterClient } from "@/components/roster/roster-client";
 import { isWhitelisted } from "@/lib/guild-whitelist";
 import { syncUserWithWhitelist } from "@/lib/sync-user";
 import { MusicControls } from "@/components/music-controls";
+import Image from "next/image";
 
 async function getDiscordId(userId: string): Promise<string | null> {
     const result = await db
@@ -62,19 +63,15 @@ async function getUserWithRole(userId: string) {
 }
 
 
-import { notInArray } from "drizzle-orm";
-
 async function getAvailableUsers() {
-    // Get all users currently in the roster
-    const currentRoster = await db.select({ userId: rosterEntries.userId }).from(rosterEntries);
-    const setOfRosterUserIds = new Set(currentRoster.map(r => r.userId));
+    // Single optimized query: LEFT JOIN + WHERE NULL (exclusion join pattern)
+    const result = await db
+        .select({ id: user.id, name: user.name })
+        .from(user)
+        .leftJoin(rosterEntries, eq(user.id, rosterEntries.userId))
+        .where(isNull(rosterEntries.id));
 
-    // Get all users
-    const allUsers = await db.select({ id: user.id, name: user.name }).from(user);
-
-    // Filter client-side or use notInArray if array is not empty
-    // Simulating "Left Join where null" or "Not In"
-    return allUsers.filter(u => !setOfRosterUserIds.has(u.id));
+    return result;
 }
 
 export default async function DashboardPage() {
@@ -120,13 +117,20 @@ export default async function DashboardPage() {
 
     return (
         <div className="min-h-screen relative">
-            {/* Wallpaper Background - Subtle */}
-            <div
-                className="fixed inset-0 bg-cover bg-center bg-no-repeat blur-sm scale-105"
-                style={{ backgroundImage: "url('/wallpaper.jpg')" }}
-            />
+            {/* Wallpaper Background - Optimized with next/image */}
+            <div className="fixed inset-0 -z-20">
+                <Image
+                    src="/wallpaper.jpg"
+                    alt=""
+                    fill
+                    priority
+                    quality={75}
+                    className="object-cover blur-sm scale-105"
+                    sizes="100vw"
+                />
+            </div>
             {/* Dark Overlay for Glassmorphism Effect */}
-            <div className="fixed inset-0 bg-black/85" />
+            <div className="fixed inset-0 bg-black/85 -z-10" />
 
             {/* Gradient decoration */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden">

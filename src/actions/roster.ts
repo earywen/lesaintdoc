@@ -8,6 +8,7 @@ import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { safeAction } from "@/lib/safe-action";
 import { z } from "zod";
+import type { Session } from "@/lib/auth-types";
 
 // Input Schemas
 const updateRosterSchema = z.object({
@@ -46,8 +47,7 @@ export const updateRosterEntry = async (input: z.infer<typeof updateRosterSchema
         }
 
         // Permission Check
-        // @ts-ignore
-        const userRole = session.user.role;
+        const userRole = (session.user as Session["user"]).role;
         const isOwner = entry.userId === session.user.id;
         const isAdmin = userRole === "admin";
 
@@ -91,8 +91,7 @@ export const deleteRosterEntry = async (input: z.infer<typeof deleteRosterSchema
         }
 
         // Only admins or owners can delete
-        // @ts-ignore
-        const isAdmin = session.user.role === "admin";
+        const isAdmin = (session.user as Session["user"]).role === "admin";
         const isOwner = entry.userId === session.user.id;
 
         if (!isOwner && !isAdmin) {
@@ -127,8 +126,7 @@ export const createRosterEntry = async (input: z.infer<typeof createRosterSchema
         }
 
         // Permission Check: only admins can manually create entries for others
-        // @ts-ignore
-        const isAdmin = session.user.role === "admin";
+        const isAdmin = (session.user as Session["user"]).role === "admin";
         if (!isAdmin) {
             throw new Error("Forbidden");
         }

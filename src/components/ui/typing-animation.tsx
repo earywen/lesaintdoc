@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { motion, MotionProps, useInView } from "motion/react"
+import { motion, MotionProps, useInView } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
@@ -39,7 +39,7 @@ export function TypingAnimation({
   cursorStyle = "line",
   ...props
 }: TypingAnimationProps) {
-  const MotionComponent = motion.create(Component, {
+  const MotionComponent = motion(Component, {
     forwardMotionProps: true,
   })
 
