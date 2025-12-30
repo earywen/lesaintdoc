@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   description: "Midnight Roster Management",
 };
 
+import { Suspense } from "react";
 import { MusicProvider } from "@/components/music-context";
 
 export default function RootLayout({
@@ -30,10 +31,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <MusicProvider>
-          {children}
-          <Toaster />
-        </MusicProvider>
+        <Suspense fallback={null}>
+          <MusicProvider>
+            {children}
+            <Toaster />
+          </MusicProvider>
+        </Suspense>
       </body>
     </html>
   );
