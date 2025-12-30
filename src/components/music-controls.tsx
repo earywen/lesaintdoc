@@ -56,9 +56,9 @@ export function MusicControls() {
                             <div className="text-zinc-300 space-y-4 text-sm leading-loose whitespace-pre-line font-medium px-6 pb-8">
                                 {`[Verse 1]
 Le vingt-quatre au soir, sous le sapin de Noël
-Zay-nith attendait son cadeau providentiel
+Zeynith attendait son cadeau providentiel
 Pas de jouets, pas d'argent, il criait au scandale
-"JE VEUX LE GOU-GUEUL SHEET !" pour son cadeau final !
+"JE VEUX LE GOOGLE SHEET !" pour son cadeau final !
 Il a ri-fresh la page, jusqu'au petit matin
 Mais le fichier n'était pas là, quel triste destin !
 (Triste destin !)
@@ -76,7 +76,7 @@ MID-NIGHT !
 On regarde les logs, on regarde la Mé-ta
 Mais y'a une certitude qui ne bougera pas
 Peu importe la classe, peu importe le look
-Le Tank le plus pété, sera joué par Xorouk !
+Le Tank le plus pété, sera joué par Xoruk !
 Il a déjà ri-roll, quarante-douze fois
 Pour être sûr de tanker, comme un vrai Roi !
 (Comme un Roi !)
@@ -90,7 +90,7 @@ Le Ross-teur se prépare, pour le mois de Mars
 Arrêtez de paniquer, arrêtez la farce !
 
 [Bridge - Slow, Ominous, Whispered then Screaming]
-Le silence d'Air-ri-wenn... pèse sur nos âmes...
+Le silence d'Earywen... pèse sur nos âmes...
 L'entretien n'a pas eu lieu... rangez vos lames...
 Personne ne sait... Si on est pris...
 OU SI ON EST VIRÉ !!!
@@ -107,9 +107,9 @@ L'hiver est fini, le printemps arrive
 Rejoignez le raid, ou partez à la dérive !
 
 [Outro]
-Zay-nith a son fichier...
-Xorouk a son Tank...
-Air-ri-wenn vous juge...
+Zeynith a son fichier...
+Xoruk a son Tank...
+Earywen vous juge...
 MID-NIGHT !
                                 `}
                             </div>
