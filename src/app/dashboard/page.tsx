@@ -5,6 +5,8 @@ import { eq, and, isNull } from "drizzle-orm";
 import { analyzeFullCoverage, analyzeClassCounts } from "@/lib/buff-logic";
 import { analyzeRoster } from "@/lib/roster-logic";
 import { auth } from "@/lib/auth";
+import { Suspense } from "react";
+import { RefreshButton } from "@/components/refresh-button";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { RosterClient } from "@/components/roster/roster-client";
@@ -163,6 +165,7 @@ export default async function DashboardPage() {
                     </div>
 
                     <div className="flex items-center gap-4">
+                        <RefreshButton />
                         <MusicControls />
                         <div className="text-right text-xs text-muted-foreground border-l border-white/10 pl-4">
                             <p>Logged in as <span className="text-white font-medium">{session.user.name}</span></p>
