@@ -7,6 +7,12 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowUpDown } from "lucide-react"
 import { EditRosterDialog } from "./edit-dialog"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 // Define the shape of our data (matches database schema roughly)
 import { RosterAnalysis } from "@/lib/roster-logic";
@@ -150,7 +156,20 @@ export const getColumns = (currentUser: any): ColumnDef<RosterMember>[] => [
         cell: ({ row }) => {
             const notes = row.original.notes;
             if (!notes) return <span className="text-zinc-700">-</span>;
-            return <span className="text-xs text-zinc-400 max-w-[200px] truncate block" title={notes}>{notes}</span>;
+            return (
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <span className="text-xs text-zinc-400 max-w-[200px] truncate block cursor-default">
+                                {notes}
+                            </span>
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-[300px] text-wrap break-words bg-zinc-900 border-zinc-800 text-zinc-300">
+                            <p>{notes}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+            );
         }
     },
     {
