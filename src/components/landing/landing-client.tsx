@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 export function LandingClient() {
-    // 27 Janvier 2026 à 23h59
-    const TARGET_DATE = new Date("2026-01-27T23:59:00");
+    // 9 Janvier 2026 à 00h00
+    const TARGET_DATE = new Date("2026-01-09T00:00:00");
 
     // Initial state check
     const [isReleased, setIsReleased] = useState(false);
@@ -70,10 +70,15 @@ export function LandingClient() {
                             <LoginButton />
                         </motion.div>
                     ) : (
-                        <MidnightCountdown
-                            targetDate={TARGET_DATE}
-                            onComplete={() => setIsReleased(true)}
-                        />
+                        <div className="flex flex-col items-center">
+                            <MidnightCountdown
+                                targetDate={TARGET_DATE}
+                                onComplete={() => setIsReleased(true)}
+                            />
+                            <p className="text-xs text-white/20 uppercase tracking-[0.2em] animate-pulse mt-[-10px]">
+                                (Anniv de Frost 🎉)
+                            </p>
+                        </div>
                     )}
                 </div>
             </div>

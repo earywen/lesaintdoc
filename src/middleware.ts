@@ -6,8 +6,8 @@ import { account } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
 import { isAdmin, isWhitelisted } from "@/lib/guild-whitelist";
 
-// Date de déblocage global (27 Janvier 2026 à 23h59)
-const MIDNIGHT_RELEASE_DATE = new Date("2026-01-27T23:59:00");
+// Date de déblocage global (9 Janvier 2026 à 00h00 - Anniv Frost)
+const MIDNIGHT_RELEASE_DATE = new Date("2026-01-09T00:00:00");
 
 /**
  * Next.js 16 Middleware with Better Auth session validation.
