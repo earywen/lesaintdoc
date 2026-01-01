@@ -100,16 +100,13 @@ export function analyzeRoster(rosterData: RosterInput[]): RosterAnalysis {
         return { main, alt, total: main + alt };
     };
 
-    // Token breakdown from mains (Excluding bench)
+    // Token breakdown from mains (Excluding bench) - ALTS IGNORED
     const tokenBreakdown = {} as Record<TokenType, { main: number; alt: number; total: number }>;
     for (const token of Object.keys(TOKEN_MAPPING) as TokenType[]) {
         const main = players.filter((p) => p.token === token && p.originalStatus !== "bench").length;
-        const alt = players.filter((p) => {
-            if (p.originalStatus === "bench") return false;
-            if (!p.altClass) return false;
-            return getTokenType(p.altClass) === token;
-        }).length;
-        tokenBreakdown[token] = { main, alt, total: main + alt };
+        // User requested to ignore Alts for token count
+        const alt = 0;
+        tokenBreakdown[token] = { main, alt, total: main };
     }
 
     // We still track confirmed players for the count

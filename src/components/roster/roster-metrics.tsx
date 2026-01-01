@@ -120,7 +120,7 @@ function TokenCounter({ token, data }: { token: TokenType; data: { main: number;
                             "text-xl font-bold bg-gradient-to-r bg-clip-text text-transparent",
                             tokenColors[token]
                         )}>
-                            {data.main}<span className="text-xs text-zinc-500">+{data.alt}</span>
+                            {data.main}
                         </div>
                         <div className="font-mono text-[10px] text-zinc-600">
                             [{"█".repeat(filled)}{"-".repeat(empty)}]
@@ -128,7 +128,7 @@ function TokenCounter({ token, data }: { token: TokenType; data: { main: number;
                     </div>
                 </TooltipTrigger>
                 <TooltipContent>
-                    <p>{data.main} main + {data.alt} alt on {token}</p>
+                    <p>{data.main} main on {token}</p>
                     {data.total >= 7 && <p className="text-amber-400 text-xs">⚠️ High loot competition</p>}
                 </TooltipContent>
             </Tooltip>
