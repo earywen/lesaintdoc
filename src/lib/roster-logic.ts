@@ -3,12 +3,12 @@
 
 import { CLASSES, Role } from "./wow-constants";
 
-// Token Mapping (updated for TWW)
+// Token Mapping (updated: Armor Types)
 export const TOKEN_MAPPING = {
-    Zenith: ["Monk", "Rogue", "Warrior", "Evoker"],
-    Dreadful: ["Death Knight", "Demon Hunter", "Warlock"],
-    Mystic: ["Druid", "Hunter", "Mage"],
-    Venerated: ["Paladin", "Priest", "Shaman"],
+    Zenith: ["Paladin", "Warrior", "Death Knight"], // Plate
+    Dreadful: ["Priest", "Mage", "Warlock"],        // Cloth
+    Mystic: ["Druid", "Monk", "Rogue", "Demon Hunter"], // Leather
+    Venerated: ["Evoker", "Hunter", "Shaman"],      // Mail
 } as const;
 
 export type TokenType = keyof typeof TOKEN_MAPPING;
@@ -55,6 +55,7 @@ export interface RosterAnalysis {
         role: Role | "Unknown";
         token: TokenType;
         status: Exclude<RosterInput["status"], null>;
+        originalStatus: string;
         notes: string | null;
     }>;
 }
@@ -67,6 +68,8 @@ export function analyzeRoster(rosterData: RosterInput[]): RosterAnalysis {
     const players = rosterData.map((entry) => {
         // Map legacy statuses if they exist in DB
         let status = entry.status as string;
+        const originalStatus = status; // Preserve original status for filtering
+
         if (status === "tentative" || status === "late" || status === "bench" || status === "declined") {
             status = "pending";
         }
@@ -78,28 +81,31 @@ export function analyzeRoster(rosterData: RosterInput[]): RosterAnalysis {
             altClass: entry.altClass || null,
             altSpec: entry.altSpec || null,
             status: status as "pending" | "confirmed" | "apply",
+            originalStatus,
             notes: entry.notes || null,
             role: getRole(entry.mainClass, entry.mainSpec),
             token: getTokenType(entry.mainClass),
         };
     });
 
-    // Count roles from main characters (ALL STATUSES)
+    // Count roles from main characters (Excluding bench)
     const countRole = (role: Role) => {
-        const main = players.filter((p) => p.role === role).length;
-        // Also count alts that provide this role
+        const main = players.filter((p) => p.role === role && p.originalStatus !== "bench").length;
+        // Also count alts that provide this role (Excluding bench)
         const alt = players.filter((p) => {
+            if (p.originalStatus === "bench") return false;
             if (!p.altClass || !p.altSpec) return false;
             return getRole(p.altClass, p.altSpec) === role;
         }).length;
         return { main, alt, total: main + alt };
     };
 
-    // Token breakdown from mains (ALL STATUSES)
+    // Token breakdown from mains (Excluding bench)
     const tokenBreakdown = {} as Record<TokenType, { main: number; alt: number; total: number }>;
     for (const token of Object.keys(TOKEN_MAPPING) as TokenType[]) {
-        const main = players.filter((p) => p.token === token).length;
+        const main = players.filter((p) => p.token === token && p.originalStatus !== "bench").length;
         const alt = players.filter((p) => {
+            if (p.originalStatus === "bench") return false;
             if (!p.altClass) return false;
             return getTokenType(p.altClass) === token;
         }).length;
